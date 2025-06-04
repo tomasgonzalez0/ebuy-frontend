@@ -1,7 +1,7 @@
-import { token } from "../variables.js";
 import { API_BASE_URL } from "../variables.js";
 
 export const getCart = async (Id) => {
+    const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}Carts/ListCartProducts?idCustomer=${Id}`, {
             method: 'GET',
@@ -19,6 +19,7 @@ export const getCart = async (Id) => {
 }
 
 export const makeOnlineSale = async (payload) =>{
+      const token = localStorage.getItem('token');
     try {
     const response = await fetch(`${API_BASE_URL}OnlineSales/Insert`, {
       method: "POST",
@@ -43,6 +44,7 @@ export const makeOnlineSale = async (payload) =>{
 }
 
 export async function clearCart(Id) {
+      const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}Carts/Clear?idCustomer=${Id}`, {
             method: 'DELETE',
@@ -64,6 +66,7 @@ export async function clearCart(Id) {
 }
 
 export async function removeItemCart(idCart, idProduct) {
+      const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}Carts/RemoveItem?idCustomer=${idCart}&idProduct=${idProduct}`, {
             method: 'DELETE',
@@ -85,6 +88,7 @@ export async function removeItemCart(idCart, idProduct) {
 }  
 
 export const addToCart = async (customerId, productId, branchName) =>{
+      const token = localStorage.getItem('token');
     try {
     const response = await fetch(`${API_BASE_URL}Carts/AddItem?idCustomer=${customerId}&idProduct=${productId}&branchName=${branchName}`, {
       method: "POST",

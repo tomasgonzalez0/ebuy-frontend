@@ -1,7 +1,8 @@
-import { token } from "../variables";
+
 const API_BASE_URL = 'https://ebuy.runasp.net/api/OnlineListings/';
 
 export async function getOnlineListing() {
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}List`,{
             method: 'GET',
@@ -16,6 +17,7 @@ export async function getOnlineListing() {
 }
 
 export async function getPublisherName(id) {
+        const token = localStorage.getItem('token');
         try {
         const response = await fetch(`${API_BASE_URL}GetOnlineListingPublisherName?idOnlineListing=${id}`,{
             method: 'GET',
@@ -33,6 +35,7 @@ export async function getPublisherName(id) {
 }
 
 export async function getListingBySupplier(id){
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`https://ebuy.runasp.net/api/OnlineListingBySuppliers/List?IdSupplier=${id}`,{
             method: 'GET',
@@ -50,6 +53,7 @@ export async function getListingBySupplier(id){
 }
 
 export async function getListingByOwn(){
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`https://ebuy.runasp.net/api/OnlineListingOwns/List`,{
             method: 'GET',

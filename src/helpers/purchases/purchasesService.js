@@ -1,6 +1,5 @@
-import { token } from "../variables";
-
 export const sendPurchaseOrder = async (payload) => {
+      const token = localStorage.getItem('token');
   try {
     const response = await fetch("https://ebuy.runasp.net/api/Purchases/Insert", {
       method: "POST",

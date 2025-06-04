@@ -1,8 +1,9 @@
-import { token } from "../variables";
+
 
 const BASE_URL = 'https://ebuy.runasp.net/api/'
 
 export async function getBranchs() {
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${BASE_URL}Branches/SearchAll`, {
             method: 'GET',

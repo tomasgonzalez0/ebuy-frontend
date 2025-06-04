@@ -1,7 +1,8 @@
-import { token } from "../variables";
+
 const API_BASE_URL = 'https://ebuy.runasp.net/api/Products';
 
 export async function getProducts() {
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch('https://ebuy.runasp.net/api/products/List',{
             method: 'GET',
@@ -19,6 +20,7 @@ export async function getProducts() {
 }
 
 export async function getProductImages(productId) {
+        const token = localStorage.getItem('token');
     try {
         const url = `https://ebuy.runasp.net/api/UploadFiles/GetImagesByProductId?IdProduct=${productId}`;
         const response = await fetch(url,{
@@ -34,6 +36,7 @@ export async function getProductImages(productId) {
 }
 
 export async function getProductById(id) {
+        const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/Search?id=${id}`,{
         method: 'GET',
           headers: {
@@ -46,6 +49,7 @@ export async function getProductById(id) {
 }
 
 export async function switchStatusProduct(id) {
+        const token = localStorage.getItem('token');
     try {
         const url = `https://ebuy.runasp.net/api/OnlineListings/ActivateAndDeactivate?IdOnlineListing=${id}`;
         const response = await fetch(url, {
@@ -65,6 +69,7 @@ export async function switchStatusProduct(id) {
 }
 
 export async function getProductsByBranch(branchName) {
+        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}/ListByBranchName?branchName=${branchName}`,{
             method: 'GET',
@@ -82,6 +87,7 @@ export async function getProductsByBranch(branchName) {
 }
 
 export async function getImagesByProductName(productName){
+        const token = localStorage.getItem('token');
     const data = await getProducts();
     const product = data.find(p => p.Name === productName);
     if (product) {
