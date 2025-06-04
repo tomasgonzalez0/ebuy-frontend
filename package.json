@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "proxy": "https://localhost:44332",
   "private": true,
-  "homepage": "https://tomasgonzalez0.github.io/ebuyfront/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
