@@ -1,9 +1,9 @@
 import { token } from "../variables";
-const API_BASE_URL = 'http://ebuy.runasp.net/api/Products';
+const API_BASE_URL = 'https://ebuy.runasp.net/api/Products';
 
 export async function getProducts() {
     try {
-        const response = await fetch('http://ebuy.runasp.net/api/products/List',{
+        const response = await fetch('https://ebuy.runasp.net/api/products/List',{
             method: 'GET',
                 headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export async function getProducts() {
 
 export async function getProductImages(productId) {
     try {
-        const url = `http://ebuy.runasp.net/api/UploadFiles/GetImagesByProductId?IdProduct=${productId}`;
+        const url = `https://ebuy.runasp.net/api/UploadFiles/GetImagesByProductId?IdProduct=${productId}`;
         const response = await fetch(url,{
             method: 'GET',
          
@@ -47,7 +47,7 @@ export async function getProductById(id) {
 
 export async function switchStatusProduct(id) {
     try {
-        const url = `http://ebuy.runasp.net/api/OnlineListings/ActivateAndDeactivate?IdOnlineListing=${id}`;
+        const url = `https://ebuy.runasp.net/api/OnlineListings/ActivateAndDeactivate?IdOnlineListing=${id}`;
         const response = await fetch(url, {
             method: 'PUT',
              headers: {

@@ -1,5 +1,5 @@
 import { token } from "../variables";
-const BASE_URL = 'http://ebuy.runasp.net/api/'
+const BASE_URL = 'https://ebuy.runasp.net/api/'
 
 export async function getSuppliers() {
     try {

@@ -1,5 +1,5 @@
 import { token } from "../variables";
-const API_BASE_URL = 'http://ebuy.runasp.net/api/OnlineListings/';
+const API_BASE_URL = 'https://ebuy.runasp.net/api/OnlineListings/';
 
 export async function getOnlineListing() {
     try {
@@ -34,7 +34,7 @@ export async function getPublisherName(id) {
 
 export async function getListingBySupplier(id){
     try {
-        const response = await fetch(`http://ebuy.runasp.net/api/OnlineListingBySuppliers/List?IdSupplier=${id}`,{
+        const response = await fetch(`https://ebuy.runasp.net/api/OnlineListingBySuppliers/List?IdSupplier=${id}`,{
             method: 'GET',
                 headers: {
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export async function getListingBySupplier(id){
 
 export async function getListingByOwn(){
     try {
-        const response = await fetch(`http://ebuy.runasp.net/api/OnlineListingOwns/List`,{
+        const response = await fetch(`https://ebuy.runasp.net/api/OnlineListingOwns/List`,{
             method: 'GET',
                 headers: {
             "Content-Type": "application/json",

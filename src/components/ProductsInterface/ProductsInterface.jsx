@@ -79,7 +79,7 @@ function Products({category, products}) {
 
         try {
             const response = await fetch(
-                `http://ebuy.runasp.net/api/UploadFiles?Data=${product.IdProduct}&Proccess=Product`,
+                `https://ebuy.runasp.net/api/UploadFiles?Data=${product.IdProduct}&Proccess=Product`,
                 {
                     method: "POST",
                     body: formData,

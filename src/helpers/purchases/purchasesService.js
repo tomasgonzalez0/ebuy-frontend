@@ -2,7 +2,7 @@ import { token } from "../variables";
 
 export const sendPurchaseOrder = async (payload) => {
   try {
-    const response = await fetch("http://ebuy.runasp.net/api/Purchases/Insert", {
+    const response = await fetch("https://ebuy.runasp.net/api/Purchases/Insert", {
       method: "POST",
         headers: {
             "Content-Type": "application/json",

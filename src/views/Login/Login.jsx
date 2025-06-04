@@ -20,7 +20,7 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch("http://ebuy.runasp.net/api/Login/SignIn", {
+      const response = await fetch("https://ebuy.runasp.net/api/Login/SignIn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

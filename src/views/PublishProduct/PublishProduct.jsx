@@ -47,10 +47,10 @@ export default function PublishProduct() {
     }
     let url = '';
     if(rol === 'Supplier'){
-       url = `http://ebuy.runasp.net/api/OnlineListingBySuppliers/Add?IdSupplier=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
+       url = `https://ebuy.runasp.net/api/OnlineListingBySuppliers/Add?IdSupplier=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
     }
     else if(rol === 'Employee'){
-       url = `http://ebuy.runasp.net/api/OnlineListingOwns/Add?IdEmployee=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
+       url = `https://ebuy.runasp.net/api/OnlineListingOwns/Add?IdEmployee=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
     }
 
     const body = {

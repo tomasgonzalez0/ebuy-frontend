@@ -77,7 +77,7 @@ export default function Register() {
                         Country: formData.country
                     }
                 };
-                const response = await fetch("http://ebuy.runasp.net/api/Customers/Register", {
+                const response = await fetch("https://ebuy.runasp.net/api/Customers/Register", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
