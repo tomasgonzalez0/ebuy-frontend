@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ebuyfront/static/css/main.e1d4e4c2.css",
-    "main.js": "/ebuyfront/static/js/main.182b983f.js",
+    "main.js": "/ebuyfront/static/js/main.8fc83b20.js",
     "static/media/gadgets.png": "/ebuyfront/static/media/gadgets.fc0e68c4db8cad8894e9.png",
     "static/media/toys.png": "/ebuyfront/static/media/toys.12f3b3dfabe6f5c5e5e3.png",
     "static/media/clothes.png": "/ebuyfront/static/media/clothes.9de76b312956d6936ebb.png",
@@ -12,10 +12,10 @@
     "index.html": "/ebuyfront/index.html",
     "static/media/cart.svg": "/ebuyfront/static/media/cart.a04f9262c56a7356df03248fc1e90075.svg",
     "main.e1d4e4c2.css.map": "/ebuyfront/static/css/main.e1d4e4c2.css.map",
-    "main.182b983f.js.map": "/ebuyfront/static/js/main.182b983f.js.map"
+    "main.8fc83b20.js.map": "/ebuyfront/static/js/main.8fc83b20.js.map"
   },
   "entrypoints": [
     "static/css/main.e1d4e4c2.css",
-    "static/js/main.182b983f.js"
+    "static/js/main.8fc83b20.js"
   ]
 }
