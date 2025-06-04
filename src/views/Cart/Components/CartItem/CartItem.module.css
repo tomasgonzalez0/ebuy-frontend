@@ -1,0 +1,31 @@
+.img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.card{
+    background-color: var(--secondary-color) !important;
+    border: 1px solid #212529 !important;
+}
+
+.seller{
+    font-style: italic !important;
+    color: var(--text-color) !important;
+}
+.quantity-input {
+  background-color: transparent !important;
+  border: 1px solid #ccc;
+  color: var(--text-color) !important; /* color de texto blanco */
+  text-align: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  width: 60px !important;
+}
+
+.quantity-input:focus {
+  outline: none;
+  border-color: #66afe9 ;
+  color: var(--text-color);
+  background-color: transparent;
+  box-shadow: 0 0 0 0.2rem rgba(102, 175, 233, 0.25);
+}

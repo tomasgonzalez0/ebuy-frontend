@@ -1,0 +1,108 @@
+.div__lightboxContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.div__lightboxContainer--lightbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 720px;
+    max-height: 620px;
+    width: 100%;
+    height: 75%;
+}
+
+.lightboxContainer__imageContainer {
+    width: 100%;
+    max-width: 495px;
+    max-height: 470px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 15px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.lightboxContainer__image {
+    width: 495px;
+    height: 470px;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.lightboxContainer__closeButton {
+    position: absolute;
+    align-self: baseline;
+    right: 60px;
+    background: transparent;
+    color: white;
+    font-size: 40px;
+    border: none;
+    cursor: pointer;
+    z-index: 1010;
+}
+
+.lightboxContainer__prevButton,
+.lightboxContainer__nextButton {
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent !important;
+}
+
+.lightboxContainer__prevButton {
+    left: -60px;
+}
+
+.lightboxContainer__nextButton {
+    right: -60px;
+}
+
+.lightboxContainer__prevButton:hover,
+.lightboxContainer__nextButton:hover,
+.lightboxContainer__closeButton:hover {
+    color: var(--primary-color, #ff6600);
+}
+
+.div__lightboxContainer--secondaryImages {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.div__lightboxContainer--secondaryImages div {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+}
+
+.div__lightboxContainer--secondaryImages div:hover,
+.div__lightboxContainer--secondaryImages div.selected {
+    border: 2px solid var(--primary-color);
+}

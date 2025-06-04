@@ -1,0 +1,31 @@
+:root{
+  --primary-color: rgb(196, 159, 59);        /* Dorado cálido */
+  --secondary-color: rgb(47, 50, 63);         /* Gris oscuro frío */
+  --background-color: rgb(49, 53, 82);       /* Indigo Dye */
+  --text-color: rgb(245, 245, 245);          /* Blanco casi puro para contraste */
+  --accent-color: rgb(130, 180, 255);        /* Azul suave para resaltar elementos */
+  
+}
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root, .root {
+  height: 100vh !important;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+body, html {
+  background-color: var(--background-color);
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

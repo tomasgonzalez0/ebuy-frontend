@@ -1,0 +1,79 @@
+.top-sell-products{
+    width: 100%;
+    height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.carousel{
+    width: calc(100% - 185px);
+    height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    
+}
+ 
+.carousel div{
+    border-radius: 10px;
+    overflow: hidden;
+}
+ 
+.carousel-item-image{
+    width: 100%;
+    height: 720px;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 1.25rem;
+        object-fit: contain;
+    background-color: white;
+
+}
+.carousel-caption{
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-caption h3 {
+    font-weight: 800;
+    /* Para navegadores que no soportan background-clip */
+    color: var(--accent-color);
+    -webkit-text-stroke: 1px #222;
+
+    letter-spacing: 1px;
+    padding: 0.25rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+.carousel-caption p {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    -webkit-text-stroke: 1px #222; 
+    text-shadow:
+        2px 2px 6px rgba(0,0,0,0.7),
+        0 0 2px #222,
+        0 0 1px #222;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.15); 
+    display: inline-block;
+}
+
+
+:global(.carousel-indicators [data-bs-target]) {
+  background-color: #222;
+  border: 2px solid var(--accent-color);
+  opacity: 1;
+}
+
+:global(.carousel-indicators .active) {
+  background-color: var(--accent-color);
+  border-color: #222;
+}

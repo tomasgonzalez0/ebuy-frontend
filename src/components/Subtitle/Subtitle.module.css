@@ -1,0 +1,8 @@
+.title-container{
+    display: flex;
+    width: calc(100% - 100px);;
+    flex-direction: column;
+}
+.title-container h2{
+    margin: 0;
+}

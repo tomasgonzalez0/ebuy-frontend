@@ -1,0 +1,10 @@
+.employee{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.content{
+  width: calc(100% - 250px);
+  height: 100vh;
+  background-color: var(--background-color);
+}
