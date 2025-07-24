@@ -55,7 +55,7 @@ export default function ProductDetail() {
 
         fetchProduct();
         fetchCartItems();
-    }, [id, customerId]);
+    }, [id, customerId, role]);
 
     const handleAddToCart = () => {
         setCartItems(prev => prev + 1);

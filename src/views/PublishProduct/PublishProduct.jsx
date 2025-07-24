@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Styles from './PublishProduct.module.css';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +6,6 @@ import { getProducts } from '../../helpers/product/productService';
 import axios from 'axios';
 
 export default function PublishProduct() {
-  const { '*': fullPath } = useParams();
   const rol = localStorage.getItem('role');
 
   const [productNameOptions, setProductNameOptions] = useState([]);

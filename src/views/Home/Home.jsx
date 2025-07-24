@@ -12,7 +12,6 @@ import Styles from './Home.module.css';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
-    const [images, setImages] = useState([]);
     const [cart, setCart] = useState([]);
     const [cartItems, setCartItems] = useState(0);
     const [topSell, setTopSell] = useState([]);
@@ -94,7 +93,7 @@ export default function Home() {
         };
 
         fetchAll();
-    }, []);
+    }, [Email, Id, role, token]);
 
     if (loading) return <LoadingSpinner text="Loading..." />;
 
