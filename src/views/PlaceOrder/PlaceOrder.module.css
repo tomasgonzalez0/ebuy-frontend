@@ -1,3 +1,161 @@
-.select option{
-    color: #212529;
+.placeOrderContainer {
+  background: var(--background-color);
+  padding: 2rem;
+  min-height: 100vh;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.form {
+  background: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+
+.select {
+  background: #fff !important;
+  color: #212529 !important;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.addProductBtn {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.orderBtn {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.total {
+  font-size: 1.3rem;
+  color: var(--accent-color);
+  margin: 1rem 0;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.noProducts {
+  color: #888;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.productsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.productItem {
+  background: var(--secondary-color);
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  transition: background 0.2s;
+}
+
+.productItem:hover,
+.productItem:focus-within {
+  background: var(--accent-color);
+}
+
+.productInfo {
+  flex: 1;
+  cursor: pointer;
+  outline: none;
+}
+
+.productDetails {
+  margin-top: 0.5rem;
+  font-size: 0.98rem;
+}
+
+.deleteBtn {
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0.3rem 0.6rem;
+}
+
+@media (max-width: 900px) {
+  .placeOrderContainer {
+    max-width: 98vw;
+    padding: 1rem;
+  }
+  .form {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .placeOrderContainer {
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  .form {
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
+  .total {
+    font-size: 1.1rem;
+  }
+  .productItem {
+    padding: 0.7rem;
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .placeOrderContainer {
+    padding: 0.2rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .form {
+    padding: 0.2rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  .addProductBtn,
+  .orderBtn {
+    font-size: 0.98rem;
+  }
+  .productItem {
+    padding: 0.4rem;
+    font-size: 0.95rem;
+  }
 }

@@ -8,11 +8,10 @@ import axios from 'axios';
 
 export default function PublishProduct() {
   const { '*': fullPath } = useParams();
-  const rol = localStorage.getItem('role')
+  const rol = localStorage.getItem('role');
 
   const [productNameOptions, setProductNameOptions] = useState([]);
   const [selectedProductName, setSelectedProductName] = useState('');
-
   const [formData, setFormData] = useState({
     description: '',
     price: '',
@@ -38,27 +37,22 @@ export default function PublishProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const supplierId = localStorage.getItem('userId');
-
     if (!supplierId) {
       alert('No se encontró el ID del proveedor (supplierId).');
       return;
     }
     let url = '';
-    if(rol === 'Supplier'){
-       url = `https://ebuy.runasp.net/api/OnlineListingBySuppliers/Add?IdSupplier=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
+    if (rol === 'Supplier') {
+      url = `https://ebuy.runasp.net/api/OnlineListingBySuppliers/Add?IdSupplier=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
+    } else if (rol === 'Employee') {
+      url = `https://ebuy.runasp.net/api/OnlineListingOwns/Add?IdEmployee=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
     }
-    else if(rol === 'Employee'){
-       url = `https://ebuy.runasp.net/api/OnlineListingOwns/Add?IdEmployee=${supplierId}&productName=${encodeURIComponent(selectedProductName)}`;
-    }
-
     const body = {
       Description: formData.description,
       Price: parseFloat(formData.price),
       AvailableQuantity: parseInt(formData.stock),
     };
-
     try {
       const response = await axios.post(url, body, {
         headers: {
@@ -66,7 +60,6 @@ export default function PublishProduct() {
           'Authorization': `${localStorage.getItem('token')}`,
         },
       });
-
       alert('Producto publicado exitosamente.');
       console.log(response.data);
     } catch (error) {
@@ -76,15 +69,14 @@ export default function PublishProduct() {
   };
 
   return (
-    <div style={{ padding: '2rem', height: '100%' }}>
-      <h2>📦 Publish a New Product ({rol})</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Selección del nombre del producto */}
+    <div className={Styles.publishContainer}>
+      <h2 className={Styles.title}>📦 Publish a New Product ({rol})</h2>
+      <form onSubmit={handleSubmit} className={Styles.form}>
         <Form.Group className='mb-3' controlId="productName">
           <Form.Label>Select Product</Form.Label>
           <Form.Select
             name="productName"
-            className={`${Styles["category-select"]} ${Styles["select"]}`}
+            className={Styles.select}
             required
             value={selectedProductName}
             onChange={handleChange}
@@ -99,36 +91,30 @@ export default function PublishProduct() {
         </Form.Group>
 
         {rol === 'Employee' && (
-          <>
-            
-            <Form.Group className="mb-3" controlId="button">
-              <Button
-                style={{ width: '100%', marginTop: '20px' }}
-                as="input"
-                type="submit"
-                value="Submit"
-              />
-            </Form.Group>
-          </>
+          <Form.Group className="mb-3" controlId="button">
+            <Button className={Styles.submitBtn} type="submit" value="Submit">
+              Submit
+            </Button>
+          </Form.Group>
         )}
 
         {rol === 'Supplier' && (
           <>
-       <Form.Group className="mb-3" controlId="description">
-  <Form.Label>Product Description</Form.Label>
-  <Form.Control
-    type="text"
-    name="description"
-    placeholder="Enter a Description"
-    required
-    value={formData.description}
-    onChange={handleChange}
-    maxLength={300}
-  />
-  <Form.Text muted>
-    {formData.description.length}/300 characters
-  </Form.Text>
-</Form.Group>
+            <Form.Group className="mb-3" controlId="description">
+              <Form.Label>Product Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                placeholder="Enter a Description"
+                required
+                value={formData.description}
+                onChange={handleChange}
+                maxLength={300}
+              />
+              <Form.Text muted>
+                {formData.description.length}/300 characters
+              </Form.Text>
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="price">
               <Form.Label>Price</Form.Label>
@@ -155,12 +141,9 @@ export default function PublishProduct() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="button">
-              <Button
-                style={{ width: '100%', marginTop: '20px' }}
-                as="input"
-                type="submit"
-                value="Submit"
-              />
+              <Button className={Styles.submitBtn} type="submit" value="Submit">
+                Submit
+              </Button>
             </Form.Group>
           </>
         )}

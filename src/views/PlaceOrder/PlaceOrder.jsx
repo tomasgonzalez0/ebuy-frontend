@@ -8,7 +8,6 @@ import { getCategories } from '../../helpers/categories/categoriesService';
 import { getBrands } from '../../helpers/brands/brandsService';
 import { sendPurchaseOrder } from '../../helpers/purchases/purchasesService';
 import { getBranchs } from '../../helpers/branch/branch';
-import { getProductsByBranch } from '../../helpers/product/productService';
 
 export default function PlaceOrder() {
   const [supplierNameOptions, setSupplierNameOptions] = useState([]);
@@ -35,40 +34,32 @@ export default function PlaceOrder() {
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      const suppliers = await getSuppliers();
-      const categories = await getCategories();
-      const brands = await getBrands();
-      const branchs = await getBranchs();
-
-      setBranchs(branchs);
-      setSupplierNameOptions(suppliers);
-      setCategories(categories);
-      setBrands(brands);
+      setBranchs(await getBranchs());
+      setSupplierNameOptions(await getSuppliers());
+      setCategories(await getCategories());
+      setBrands(await getBrands());
     };
 
-    const total = addedProducts.reduce((acc, product) => {
-      const cost = parseFloat(product.costPrice) || 0;
-      const stock = parseInt(product.stock) || 0;
-      return acc + (cost * stock);
-    }, 0);
-
-    setTotalPrice(total);
+    setTotalPrice(
+      addedProducts.reduce((acc, product) => {
+        const cost = parseFloat(product.costPrice) || 0;
+        const stock = parseInt(product.stock) || 0;
+        return acc + (cost * stock);
+      }, 0)
+    );
     fetchInitialData();
   }, [addedProducts]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!selectedSupplierId || addedProducts.length === 0) {
       alert("Debes seleccionar un proveedor y añadir al menos un producto.");
       return;
     }
-
     if (!selectedSupplierId || isNaN(parseInt(selectedSupplierId))) {
-  alert("Debes seleccionar un proveedor válido.");
-  return;
-}
-
+      alert("Debes seleccionar un proveedor válido.");
+      return;
+    }
     try {
       const formattedPayload = {
         IdSupplier: Number(selectedSupplierId),
@@ -87,15 +78,11 @@ export default function PlaceOrder() {
           Quantity: parseInt(product.stock),
         }))
       };
-
-      console.log("Payload a enviar:", JSON.stringify(formattedPayload, null, 2));
       await sendPurchaseOrder(formattedPayload);
       alert("Orden de compra enviada exitosamente 🎉");
-
       setSelectedSupplierId('');
       setAddedProducts([]);
       setTotalPrice(0);
-
     } catch (error) {
       alert("Error al enviar la orden: " + error.message);
     }
@@ -122,21 +109,20 @@ export default function PlaceOrder() {
   };
 
   const handleDeleteProduct = (indexToDelete) => {
-    const updatedProducts = addedProducts.filter((_, index) => index !== indexToDelete);
-    setAddedProducts(updatedProducts);
+    setAddedProducts(addedProducts.filter((_, index) => index !== indexToDelete));
   };
 
   return (
-    <div style={{ padding: '2rem', height: '100vh' }}>
-      <h2>🛒 Place an Order</h2>
-      <form onSubmit={handleSubmit}>
+    <div className={Styles.placeOrderContainer}>
+      <h2 className={Styles.title}>🛒 Place an Order</h2>
+      <form onSubmit={handleSubmit} className={Styles.form}>
         <Form.Group className='mb-3' controlId="supplierName">
           <Form.Label>Select Supplier</Form.Label>
           <Form.Select
             required
             value={selectedSupplierId}
             onChange={(e) => setSelectedSupplierId(e.target.value)}
-            className={`${Styles["category-select"]} ${Styles["select"]}`}
+            className={Styles.select}
           >
             <option value="">-- Select --</option>
             {supplierNameOptions.map(supplier => (
@@ -151,7 +137,7 @@ export default function PlaceOrder() {
             required
             value={selectedBranchName}
             onChange={(e) => setSelectedBranchName(e.target.value)}
-            className={`${Styles["category-select"]} ${Styles["select"]}`}
+            className={Styles.select}
           >
             <option value="">-- Select --</option>
             {branchs.map(branch => (
@@ -165,7 +151,7 @@ export default function PlaceOrder() {
           <Form.Select
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
-            className={Styles["select"]}
+            className={Styles.select}
           >
             <option value="Credit card">Credit card</option>
             <option value="Debit card">Debit card</option>
@@ -174,30 +160,35 @@ export default function PlaceOrder() {
           </Form.Select>
         </Form.Group>
 
-        <Button variant="primary" onClick={() => setShowModal(true)}>
+        <Button variant="primary" onClick={() => setShowModal(true)} className={Styles.addProductBtn}>
           + Add New Product
         </Button>
 
         <hr />
-        <h2>Total: ${totalPrice.toFixed(2)}</h2>
+        <h2 className={Styles.total}>Total: ${totalPrice.toFixed(2)}</h2>
 
         <Form.Group className="mb-3" controlId="button">
-          <Button style={{ width: "100%", marginTop: "20px" }} as="input" type="submit" value="Order" />
+          <Button className={Styles.orderBtn} as="input" type="submit" value="Order" />
         </Form.Group>
       </form>
 
       <hr />
-      <h4>📝 Products to Order</h4>
+      <h4 className={Styles.subtitle}>📝 Products to Order</h4>
       {addedProducts.length === 0 ? (
-        <p>No products added yet.</p>
+        <p className={Styles.noProducts}>No products added yet.</p>
       ) : (
-        <ul className="list-group bg-dark">
+        <ul className={Styles.productsList}>
           {addedProducts.map((product, index) => (
-            <li key={index} className="list-group-item bg-dark text-light d-flex justify-content-between align-items-start" style={{ cursor: 'pointer' }}>
-              <div onClick={() => setExpandedIndex(expandedIndex === index ? null : index)} style={{ flex: 1 }}>
+            <li key={index} className={Styles.productItem}>
+              <div
+                onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                className={Styles.productInfo}
+                tabIndex={0}
+                aria-label={`Product ${product.name}`}
+              >
                 <strong>{product.name}</strong>
                 {expandedIndex === index && (
-                  <div className="mt-2">
+                  <div className={Styles.productDetails}>
                     <p><strong>Description:</strong> {product.description}</p>
                     <p><strong>Cost Price:</strong> ${product.costPrice}</p>
                     <p><strong>Sale Price:</strong> ${product.salePrice}</p>
@@ -208,7 +199,7 @@ export default function PlaceOrder() {
                   </div>
                 )}
               </div>
-              <Button variant="danger" size="sm" onClick={() => handleDeleteProduct(index)} style={{ marginLeft: '1rem' }}>
+              <Button variant="danger" size="sm" onClick={() => handleDeleteProduct(index)} className={Styles.deleteBtn}>
                 ❌
               </Button>
             </li>
@@ -216,7 +207,7 @@ export default function PlaceOrder() {
         </ul>
       )}
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton className='bg-dark'>
           <Modal.Title className='bg-dark'>Add New Product</Modal.Title>
         </Modal.Header>
@@ -226,63 +217,57 @@ export default function PlaceOrder() {
               <Form.Label>Name</Form.Label>
               <Form.Control name='name' value={newProduct.name} onChange={handleNewProductChange} required />
             </Form.Group>
-
             <Form.Group className='mb-3'>
               <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" name='description' value={newProduct.description} onChange={handleNewProductChange} required />
             </Form.Group>
-
             <Form.Group className='mb-3'>
               <Form.Label>Cost Price</Form.Label>
               <Form.Control type='number' name='costPrice' value={newProduct.costPrice} onChange={handleNewProductChange} required />
             </Form.Group>
-
             <Form.Group className='mb-3'>
               <Form.Label>Sale Price</Form.Label>
               <Form.Control type='number' name='salePrice' value={newProduct.salePrice} onChange={handleNewProductChange} required />
             </Form.Group>
-
             <Form.Group className='mb-3'>
               <Form.Label>Stock</Form.Label>
               <Form.Control type='number' name='stock' value={newProduct.stock} onChange={handleNewProductChange} required />
             </Form.Group>
-
             <Form.Group className='mb-3'>
               <Form.Label>Warranty (Months)</Form.Label>
               <Form.Control type='number' name='warrantyMonths' value={newProduct.warrantyMonths} onChange={handleNewProductChange} required />
             </Form.Group>
-
-           <Form.Group className='mb-3'>
-          <Form.Label>Category</Form.Label>
-            <Form.Select
-              name='categoryName'
-              value={newProduct.categoryName}
-              onChange={handleNewProductChange}
-              required
-            >
-              <option value="" className='bg-dark'>-- Select Category --</option>
-              {categories.map(cat => (
-                <option key={cat.IdCategory} value={cat.Name} className='bg-dark'>{cat.Name}</option>
-              ))}
-            </Form.Select>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label>Brand</Form.Label>
-            <Form.Select
-              name='brandName'
-              value={newProduct.brandName}
-              onChange={handleNewProductChange}
-              required
-            >
-              <option value="" className='bg-dark'>-- Select Brand --</option>
-              {brands.map(brand => (
-                <option key={brand.IdBrand} value={brand.Name} className='bg-dark'>{brand.Name}</option>
-              ))}
-            </Form.Select>
-        </Form.Group>
-
-            <Button variant="primary" type="submit" style={{ width: '100%' }}>
+            <Form.Group className='mb-3'>
+              <Form.Label>Category</Form.Label>
+              <Form.Select
+                name='categoryName'
+                value={newProduct.categoryName}
+                onChange={handleNewProductChange}
+                required
+                className={Styles.select}
+              >
+                <option value="">-- Select Category --</option>
+                {categories.map(cat => (
+                  <option key={cat.IdCategory} value={cat.Name}>{cat.Name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Brand</Form.Label>
+              <Form.Select
+                name='brandName'
+                value={newProduct.brandName}
+                onChange={handleNewProductChange}
+                required
+                className={Styles.select}
+              >
+                <option value="">-- Select Brand --</option>
+                {brands.map(brand => (
+                  <option key={brand.IdBrand} value={brand.Name}>{brand.Name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Button variant="primary" type="submit" className={Styles.addProductBtn}>
               Add Product
             </Button>
           </Form>

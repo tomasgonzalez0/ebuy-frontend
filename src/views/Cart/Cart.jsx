@@ -3,15 +3,13 @@ import Styles from "./Cart.module.css";
 import Subtitle from "../../components/Subtitle/Subtitle";
 import CartItem from "./Components/CartItem/CartItem";
 import { getProducts, getProductImages } from "../../helpers/product/productService";
-import { getImagesByProductName } from "../../helpers/product/productService";
 import LoadingSpinner from "../components/Loader/Loading";
 import { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { getCart } from "../../helpers/cart/cart";
 import { getListingByOwn } from "../../helpers/product/onlineLIsting";
 import { getCustomerById } from "../../helpers/customer/customer";
-import { Navigate, useNavigate } from "react-router-dom";
-import { makeOnlineSale, clearCart, removeItemCart } from "../../helpers/cart/cart";
+import { useNavigate } from "react-router-dom";
+import { makeOnlineSale, clearCart, removeItemCart, getCart } from "../../helpers/cart/cart";
 
 // ...existing code...
 export default function Cart() {

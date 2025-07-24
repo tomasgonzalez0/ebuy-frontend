@@ -5,7 +5,7 @@ import Topbar from '../../components/Topbar/Topbar';
 import ProductImage from './components/ProductImages/ProductImages';
 import ProductInfo from './components/ProductInfo/ProductInfo';
 import LoadingSpinner from '../components/Loader/Loading';
-import { getProductById, getProductImages } from '../../helpers/product/productService';
+import { getProductImages } from '../../helpers/product/productService';
 import { getOnlineListing, getPublisherName } from '../../helpers/product/onlineLIsting';
 import { getCart } from '../../helpers/cart/cart';
 
@@ -20,7 +20,7 @@ export default function ProductDetail() {
     let customerId = localStorage.getItem("Id");
 
     useEffect(() => {
-        setLoading(true); // <-- loading inicia en true
+        setLoading(true);
         const fetchProduct = async () => {
             const listenings = await getOnlineListing();
             const productData = listenings.find(product => product.Id === parseInt(id));
@@ -41,7 +41,7 @@ export default function ProductDetail() {
 
             setProduct(processedProduct);
             setPublisherName(publisher);
-            setLoading(false); // <-- loading termina cuando todo está listo
+            setLoading(false);
         };
 
         const fetchCartItems = async () => {
@@ -65,7 +65,7 @@ export default function ProductDetail() {
     if (!product) return <h1>Product not found</h1>;
 
     return (
-        <article className={Styles["product-detail"]}>
+        <main className={Styles["product-detail"]}>
             <Topbar Email={Email} numberOfItems={cartItems} />
             <section className={Styles["content"]}>
                 <ProductImage productInformation={product.images} />
@@ -77,6 +77,6 @@ export default function ProductDetail() {
                     productId={product.IdProduct}
                 />
             </section>
-        </article>
+        </main>
     );
 }

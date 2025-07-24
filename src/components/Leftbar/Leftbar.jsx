@@ -1,8 +1,10 @@
-// Leftbar.jsx
-import { NavLink, resolvePath } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Styles from "./Leftbar.module.css";
 
 export default function Leftbar({ rol }) {
+  const [open, setOpen] = useState(false);
+
   const menuItems = rol === "Employee"
     ? [
         { id: 'home', label: '🏠 Home' },
@@ -18,10 +20,17 @@ export default function Leftbar({ rol }) {
       ];
 
   return (
-    <aside className={Styles["leftbar"]}>
-      <div className="d-flex flex-column p-3 text-white" style={{ height: '100vh', backgroundColor: 'rgb(47, 50, 63)' }}>
-        <h5 className="mb-4">{rol} Menu</h5>
-        <ul className="list-unstyled">
+    <aside className={`${Styles.leftbar} ${open ? Styles.open : ""}`}>
+      <button
+        className={Styles.menuToggle}
+        aria-label={open ? "Close menu" : "Open menu"}
+        onClick={() => setOpen(!open)}
+      >
+        {open ? "✖" : "☰"}
+      </button>
+      <nav className={Styles.menu} aria-label={`${rol} menu`} tabIndex={open ? 0 : -1}>
+        <h5 className={Styles.menuTitle}>{rol} Menu</h5>
+        <ul className={Styles.menuList}>
           {menuItems.map(({ id, label }) => (
             <li key={id}>
               <NavLink
@@ -29,26 +38,25 @@ export default function Leftbar({ rol }) {
                 className={({ isActive }) =>
                   `${Styles.linkItem} ${isActive ? Styles.active : ""}`
                 }
+                tabIndex={open ? 0 : -1}
               >
                 {label}
               </NavLink>
             </li>
           ))}
         </ul>
-          <hr />
-
-            <div>
-              <NavLink
-                to="/"
-                onClick={() => {localStorage.clear();}}
-                className={({ isActive }) =>
-                  `${Styles.linkItem} ${isActive ? Styles.active : ""}`
-                }
-              >
-                ⬅️ Log out
-              </NavLink>
-            </div>
-      </div>
+        <hr className={Styles.divider} />
+        <NavLink
+          to="/"
+          onClick={() => {localStorage.clear();}}
+          className={({ isActive }) =>
+            `${Styles.linkItem} ${isActive ? Styles.active : ""}`
+          }
+          tabIndex={open ? 0 : -1}
+        >
+          ⬅️ Log out
+        </NavLink>
+      </nav>
     </aside>
   );
 }
