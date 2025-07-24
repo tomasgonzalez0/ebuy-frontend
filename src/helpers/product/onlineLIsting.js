@@ -2,7 +2,6 @@
 const API_BASE_URL = 'https://ebuy.runasp.net/api/OnlineListings/';
 
 export async function getOnlineListing() {
-        const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}List`,{
             method: 'GET',

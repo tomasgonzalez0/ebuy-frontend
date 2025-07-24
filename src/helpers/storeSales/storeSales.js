@@ -23,7 +23,7 @@ export const sendInStoreSale = async (payload) => {
     }
 
     if (!response.ok) {
-      throw new Error((data && data.message) || 'Error to send in-store sale order');
+      throw new Error(data?.message || 'Error to send in-store sale order');
     }
 
     return data;

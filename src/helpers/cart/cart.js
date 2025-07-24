@@ -33,7 +33,7 @@ export const makeOnlineSale = async (payload) =>{
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error((data && data.message) || 'Error to send online sale order');
+      throw new Error(data?.message || 'Error to send online sale order');
     }
 
     return data;
@@ -102,7 +102,7 @@ export const addToCart = async (customerId, productId, branchName) =>{
     console.log("data"  , data);
 
     if (!response.ok) {
-      throw new Error((data && data.message) || 'Error adding item to cart');
+      throw new Error(data?.message || 'Error adding item to cart');
     }
 
     return data;

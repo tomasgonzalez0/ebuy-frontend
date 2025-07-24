@@ -20,7 +20,6 @@ export async function getProducts() {
 }
 
 export async function getProductImages(productId) {
-        const token = localStorage.getItem('token');
     try {
         const url = `https://ebuy.runasp.net/api/UploadFiles/GetImagesByProductId?IdProduct=${productId}`;
         const response = await fetch(url,{
@@ -87,7 +86,6 @@ export async function getProductsByBranch(branchName) {
 }
 
 export async function getImagesByProductName(productName){
-        const token = localStorage.getItem('token');
     const data = await getProducts();
     const product = data.find(p => p.Name === productName);
     if (product) {

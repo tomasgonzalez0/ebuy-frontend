@@ -136,34 +136,40 @@ const handlePayNow = async () => {
   if (loading) return <LoadingSpinner text="Loading cart..." />;
 
   return (
-    <article className={Styles["cart"]}>
-      <Topbar Email={Email} cart={cartProducts} numberOfItems={cartItems}/>
+    <article className={Styles.cart}>
+      <Topbar Email={Email} cart={cartProducts} numberOfItems={cartItems} />
       <section className={Styles["cart-container"]}>
-        <div className={Styles["subtitle"]}>
-          <Subtitle text={"Cart"} />
+        <div className={Styles.subtitle}>
+          <Subtitle text="Cart" />
         </div>
-        <Form>
 
-        </Form>
-        <Container className="py-3" style={{ maxWidth: "800px" }}>
-          {cartProducts.map((product, index) => (
-            <CartItem
-              key={product.id}
-              product={product}
-              onQuantityChange={handleQuantityChange}
-              onRemove={handleRemoveProduct}
-            />
-          ))}
+        <Container className="py-3" style={{ maxWidth: "800px", width: "100%" }}>
+          {cartProducts.length === 0 ? (
+            <div className="text-center my-5">
+              <h4>Your cart is empty</h4>
+            </div>
+          ) : (
+            cartProducts.map((product) => (
+              <CartItem
+                key={product.id}
+                product={product}
+                onQuantityChange={handleQuantityChange}
+                onRemove={handleRemoveProduct}
+              />
+            ))
+          )}
 
-
-          <div className="mt-4 p-3 border rounded bg-dark" id={Styles["payment"]}>
-            <h5>Total: <span className="fw-bold">${total}</span></h5>
-          <Form.Group controlId="paymentSelect" className="my-3">
-              <Form.Label>Select Paymenth Method</Form.Label>
+          <div className="mt-4 p-3 border rounded" id={Styles.payment}>
+            <h5>
+              Total: <span className="fw-bold">${total}</span>
+            </h5>
+            <Form.Group controlId="paymentSelect" className="my-3">
+              <Form.Label>Select Payment Method</Form.Label>
               <Form.Select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className={Styles["select"]}
+                className={Styles.select}
+                aria-label="Select payment method"
               >
                 <option value="Credit card">Credit card</option>
                 <option value="Debit card">Debit card</option>
@@ -177,16 +183,23 @@ const handlePayNow = async () => {
               <Form.Select
                 value={customer.Address || ""}
                 onChange={(e) => setCustomer({ ...customer, Address: e.target.value })}
-                className={Styles["select"]}
-                >
-                  <option value={customer.Address || ""}>
-                    {customer.Address || "No address available"}
-                  </option>
+                className={Styles.select}
+                aria-label="Select address"
+              >
+                <option value={customer.Address || ""}>
+                  {customer.Address || "No address available"}
+                </option>
               </Form.Select>
             </Form.Group>
 
-            <Button variant="success" size="lg" className="w-100" onClick={handlePayNow}
-            >Pay Now
+            <Button
+              variant="success"
+              size="lg"
+              className="w-100"
+              onClick={handlePayNow}
+              disabled={cartProducts.length === 0}
+            >
+              Pay Now
             </Button>
           </div>
         </Container>
